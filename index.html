@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Digital Adsorption Lab – Malachite Green Predictor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="lab-root">
+        <!-- Glowing background shapes -->
+        <div class="lab-glow lab-glow-1"></div>
+        <div class="lab-glow lab-glow-2"></div>
+
+        <div class="lab-shell">
+            <!-- LEFT: Info / Branding -->
+            <aside class="lab-sidebar">
+                <div class="lab-logo">
+                    <div class="logo-icon">
+                        <div class="flask-neck"></div>
+                        <div class="flask-body"></div>
+                        <div class="flask-liquid"></div>
+                        <div class="bubble bubble-1"></div>
+                        <div class="bubble bubble-2"></div>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Digital Adsorption Lab</h1>
+                        <p>Malachite Green · Corn Cob Adsorbent</p>
+                    </div>
+                </div>
+
+                <div class="lab-panel">
+                    <h2>Experiment Summary</h2>
+                    <ul class="lab-list">
+                        <li><span>Adsorbate</span><strong>Malachite Green (MG)</strong></li>
+                        <li><span>Adsorbent</span><strong>Corn Cob</strong></li>
+                        <li><span>Output</span><strong>% Removal Efficiency</strong></li>
+                        <li><span>Model Type</span><strong>Data-driven empirical</strong></li>
+                    </ul>
+                </div>
+
+                <div class="lab-panel lab-status">
+                    <h2>Lab Status</h2>
+                    <div class="status-row">
+                        <span class="status-indicator status-ok"></span>
+                        <div>
+                            <div class="status-label">Simulation Ready</div>
+                            <div class="status-sub">Enter parameters and run prediction.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="lab-footer">
+                    <p>Academic tool for adsorption studies.</p>
+                    <p class="lab-footer-small">Designed for college project · Hostable on GitHub Pages</p>
+                </footer>
+            </aside>
+
+            <!-- RIGHT: Main Lab Console -->
+            <main class="lab-main">
+                <div class="console-card">
+                    <header class="console-header">
+                        <div>
+                            <h2>Set Experimental Parameters</h2>
+                            <p>Adjust contact time, dose and initial concentration to estimate the dye removal.</p>
+                        </div>
+                        <div class="badge">Mode: Simulation</div>
+                    </header>
+
+                    <section class="console-grid">
+                        <!-- Time -->
+                        <div class="control-block">
+                            <label for="time-input">Contact Time (min)</label>
+                            <div class="control-row">
+                                <input id="time-input" type="number" min="1" max="240" placeholder="e.g. 60">
+                                <span class="unit">min</span>
+                            </div>
+                            <input id="time-range" type="range" min="10" max="120" value="60" step="10">
+                            <div class="hint">Typical lab range: 10 – 120 minutes</div>
+                        </div>
+
+                        <!-- Dose -->
+                        <div class="control-block">
+                            <label for="dose-input">Dose (g/L)</label>
+                            <div class="control-row">
+                                <input id="dose-input" type="number" min="0.05" max="2" step="0.05"
+                                    placeholder="e.g. 0.5">
+                                <span class="unit">g/L</span>
+                            </div>
+                            <input id="dose-range" type="range" min="0.1" max="1.0" value="0.5" step="0.05">
+                            <div class="hint">Typical range: 0.10 – 1.00 g/L</div>
+                        </div>
+
+                        <!-- Concentration -->
+                        <div class="control-block">
+                            <label for="conc-input">Initial Dye Concentration (mg/L)</label>
+                            <div class="control-row">
+                                <input id="conc-input" type="number" min="1" max="300" step="1" placeholder="e.g. 40">
+                                <span class="unit">mg/L</span>
+                            </div>
+                            <input id="conc-range" type="range" min="10" max="80" value="40" step="5">
+                            <div class="hint">Typical range: 10 – 80 mg/L</div>
+                        </div>
+                    </section>
+
+                    <div class="console-actions">
+                        <button id="btn-preset-optimal" type="button">Set Typical Optimal Conditions</button>
+                        <button id="btn-predict" type="button" class="primary">Run Prediction</button>
+                    </div>
+                </div>
+
+                <!-- Result + Interpretation -->
+                <div class="result-layout">
+                    <section class="result-card">
+                        <h3>Predicted Removal Efficiency</h3>
+                        <div class="result-display">
+                            <div class="result-value" id="result-value">--</div>
+                            <div class="result-unit">%</div>
+                        </div>
+                        <div class="result-tags">
+                            <span id="result-tag-quality" class="tag">Awaiting input</span>
+                            <span id="result-tag-range" class="tag secondary">Within recommended range</span>
+                        </div>
+                    </section>
+
+                    <section class="result-card secondary">
+                        <h3>Quick Interpretation</h3>
+                        <ul class="interpretation-list" id="interpretation-list">
+                            <li>Increase contact time and dose to generally improve removal.</li>
+                            <li>Higher initial dye concentration usually reduces percentage removal.</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <section class="note-card">
+                    <h3>Note for Report / Thesis</h3>
+                    <p>
+                        This interface represents a simulated adsorption laboratory. The prediction is based on an
+                        empirical
+                        relationship derived from Malachite Green removal using corn cob adsorbent. It is intended for
+                        academic
+                        and preliminary design purposes. For final design, experimental validation is recommended.
+                    </p>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
